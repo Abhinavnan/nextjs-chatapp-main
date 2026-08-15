@@ -19,7 +19,6 @@
     "lucide-react": "^1.7.0",
     "mongoose": "^9.7.4",
     "next": "^16.2.12",
-    "next-auth": "^4.24.13",
     "postcss": "^8.5.25",
     "posthog-js": "^1.399.5",
     "react": "19.2.4",
