@@ -1,0 +1,52 @@
+[
+  {
+    "event_name": "user_registered",
+    "event_description": "Fired when a user successfully submits the registration form.",
+    "file": "app/components/register/RegistrationForm.tsx"
+  },
+  {
+    "event_name": "user_logged_in",
+    "event_description": "Fired when a user successfully logs in via the login form.",
+    "file": "app/components/register/RegistrationForm.tsx"
+  },
+  {
+    "event_name": "password_reset_requested",
+    "event_description": "Fired when a user requests a password reset by submitting their email.",
+    "file": "app/components/reset-password/ResetPassword.tsx"
+  },
+  {
+    "event_name": "email_verified",
+    "event_description": "Fired when a user successfully verifies their email with the verification code.",
+    "file": "app/components/reset-password/ResetPassword.tsx"
+  },
+  {
+    "event_name": "password_reset_completed",
+    "event_description": "Fired when a user successfully resets their password after verification.",
+    "file": "app/components/register/RegistrationForm.tsx"
+  },
+  {
+    "event_name": "profile_edited",
+    "event_description": "Fired when a user successfully updates their profile information.",
+    "file": "app/components/register/RegistrationForm.tsx"
+  },
+  {
+    "event_name": "password_changed",
+    "event_description": "Fired when a user successfully changes their account password.",
+    "file": "app/components/register/RegistrationForm.tsx"
+  },
+  {
+    "event_name": "chat_opened",
+    "event_description": "Fired when a user clicks to open a chat with a contact.",
+    "file": "app/components/contact/Chat.tsx"
+  },
+  {
+    "event_name": "message_sent",
+    "event_description": "Fired when a user sends a message in a chat conversation.",
+    "file": "app/components/chat/ChatField.tsx"
+  },
+  {
+    "event_name": "contact_info_viewed",
+    "event_description": "Fired when a user opens the info panel for a specific contact.",
+    "file": "app/components/contact/ContactInfo.tsx"
+  }
+]

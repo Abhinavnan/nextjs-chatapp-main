@@ -1,0 +1,52 @@
+'use client' // Error boundaries must be Client Components
+import { useEffect } from 'react';
+import posthog from 'posthog-js';
+import Image from 'next/image';
+import Link from 'next/link';
+import useAuth from '@/components/util/hooks/Auth-hook';
+
+export default function GlobalError({
+  error,
+  unstable_retry,
+}: {
+  error: Error & { digest?: string }
+  unstable_retry: () => void
+}) {
+  const { isLogin } = useAuth(true);
+
+  useEffect(() => {
+      console.error('Chat error:', error);
+      posthog.captureException(error);
+    }, [error]);
+
+  return (
+    // global-error must include html and body tags
+    <html>
+      <body>
+        <section className="flex flex-1 flex-col items-center h-screen bg-gray-100 p-2">
+          <div className="py-5">
+            <h2 className="text-2xl font-bold text-red-500">Something went wrong in Chat!</h2>
+          </div>
+          <Image src="https://iberikatrail.barrel.cloud/assets/error-D5dwkC3o.png" alt="Error" width={700} height={700} loading='eager'
+            className="max-w-xl max-h-xl mx-auto rounded-md" />
+          <p className="text-lg text-gray-700 py-2">{error.message}</p>
+          <button onClick={() => unstable_retry()}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition cursor-pointer"
+          >
+            Try again
+          </button>
+          {isLogin ? 
+            <button onClick={() => window.location.reload()}
+              className="text-white px-4 py-2 mt-2 rounded-md bg-slate-500 hover:bg-slate-600 transition cursor-pointer"
+            >
+              Reload Page
+            </button> :
+            <Link href='/login' className="text-white px-4 py-2 mt-2 rounded-md bg-green-500 hover:bg-green-600 transition cursor-pointer">
+              Login again
+            </Link>
+          }
+        </section>
+      </body>
+    </html>
+  )
+}
