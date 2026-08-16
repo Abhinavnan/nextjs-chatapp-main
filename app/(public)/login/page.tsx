@@ -1,6 +1,8 @@
 import React from 'react';
 import RegistrationForm from '@/components/contents/register/RegistrationForm';
 
+export const instant = false;
+
 const Login = () => {
   return (
     <section id="login" aria-labelledby="login" aria-label='Login form' 

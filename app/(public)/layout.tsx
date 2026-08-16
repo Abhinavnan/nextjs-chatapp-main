@@ -1,6 +1,8 @@
 import React, {ReactNode} from 'react';
 import Link from 'next/link';
 
+export const instant = false;
+
 const PublicLayout = ({ children }: { children: ReactNode }) => {
     return (
         <div className="flex flex-col min-h-screen">

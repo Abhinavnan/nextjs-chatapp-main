@@ -3,7 +3,7 @@ import { SameSite } from '@/components/util/types';
 const baseUrl = process.env.NEXT_INTERNAL_BASE_URL || 'http://localhost:3000';
 const mongoDBConnectionURL = process.env.MONGODB_CONNECTION_URL;
 const awsRegion = process.env.NEXT_AWS_REGION;
-const s3BucketName = process.env.NEXT_AWS_REGION;
+const s3BucketName = process.env.NEXT_AWS_S3_BUCKET_NAME;
 const resendApiKey = process.env.RESEND_API_KEY;
 const jwtSecret = process.env.JWT_SECRET as string;
 const isProduction = process.env.NODE_ENV === 'production';
