@@ -1,8 +1,10 @@
-import {ReactNode, Suspense} from 'react'
+import {ReactNode, Suspense} from 'react';
 import SearchBar from '@/components/contents/SearchBar/SearchBar';
 import ContactsButton from '@/components/contents/Navbar/ContactsButton';
 import AvatarRoot from '@/components/contents/Navbar/AvatarRoot';
 import RoundProfilePictureSkeleton from '@/components/contents/skeleton/RoundProfilePictureSkeleton';
+
+export const instant = false;
 
 const PrivateLayout = ({ children }: { children: ReactNode }) => {
   return (
