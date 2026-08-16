@@ -47,4 +47,6 @@ type EmailPayload = | { from: string; to: string[]; subject: string; react: Reac
   | { from: string; to: string[]; subject: string; html: string; text?: string }
   | { from: string; to: string[]; subject: string; text: string };
 
-export type { Contact, UserDetails, MessageInfo, EmailPayload, StatusInfo };
+type SameSite = 'strict' | 'lax' | 'none';
+
+export type { Contact, UserDetails, MessageInfo, EmailPayload, StatusInfo, SameSite };

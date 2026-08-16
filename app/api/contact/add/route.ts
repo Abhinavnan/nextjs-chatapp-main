@@ -1,6 +1,6 @@
 import zod from "zod";
 import { revalidateTag } from 'next/cache';
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest, connection } from "next/server";
 import connectToDatabase from "@/components/lib/database/mongoose";
 import { validateTokenServerSide } from "@/components/lib/actions/authAction";
 import { withErrorHandler } from "@/components/lib/error/withErrorHandler";
@@ -14,7 +14,8 @@ import { sendAPICall } from "@/components/lib/services/utilityServices";
 const emailSchema = zod.string().email('Invalid email address').trim().max(25, 'Email id maximum character length in 25');
 
 const PATCH = withErrorHandler(async (request: NextRequest) => {
-    const { userId, email: userEmail } = await validateTokenServerSide(true);
+    await connection();
+    const { userId, email: userEmail } = await validateTokenServerSide(request);
     const { email } = await request.json();
     const parsedInputs = emailSchema.safeParse(email);
     if (!parsedInputs.success) {

@@ -9,7 +9,7 @@ interface ContactDetailsPageProps {
 }
 
 const ContactIndexPageRoot = async ({ params }: ContactDetailsPageProps) => {
-  const { userId } = await validateTokenServerSide(false);
+  const { userId } = await validateTokenServerSide();
   const { index } = await params;
   const receiverData = await getReceiverDetailsByIndex(userId, Number(index));
   const contactData = sanitiseContactData(receiverData);

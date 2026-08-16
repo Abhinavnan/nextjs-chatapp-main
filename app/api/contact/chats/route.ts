@@ -1,5 +1,5 @@
 import zod from "zod";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest, connection } from "next/server";
 import { withErrorHandler } from "@/components/lib/error/withErrorHandler";
 import { validateTokenServerSide } from "@/components/lib/actions/authAction";
 import { getReceiverDetailsByIndex, getMessages } from "@/components/lib/services/contactServices";
@@ -13,7 +13,8 @@ const cursorSchema = zod.object({
 })
 
 const GET = withErrorHandler(async (request: NextRequest) => {
-    const { userId } = await validateTokenServerSide(true);
+    await connection();
+    const { userId } = await validateTokenServerSide(request);
     const { searchParams } = new URL(request.url);
     const params = Object.fromEntries(searchParams);
     const parsedParams = cursorSchema.safeParse(params);

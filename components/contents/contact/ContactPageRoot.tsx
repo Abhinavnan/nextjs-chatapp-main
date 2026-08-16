@@ -4,7 +4,7 @@ import { getUserContacts } from '@/components/lib/services/contactServices';
 import { validateTokenServerSide } from '@/components/lib/actions/authAction';
 
 const ContactPageRoot = async () => {
-  const { userId } = await validateTokenServerSide(true);
+  const { userId } = await validateTokenServerSide();
   const { contactList } = await getUserContacts(userId);
 
   return (

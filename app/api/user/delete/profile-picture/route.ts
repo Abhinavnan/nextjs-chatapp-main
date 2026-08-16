@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest, connection } from "next/server";
 import { deleteFileFromS3 } from "@/components/lib/services/s3Services";
 import { User } from "@/components/lib/database/databaseModels";
 import connectToDatabase from "@/components/lib/database/mongoose";
@@ -8,15 +8,16 @@ import { withErrorHandler } from "@/components/lib/error/withErrorHandler";
 import { updateUserCache } from "@/components/lib/services/userServices";
 import { validateTokenServerSide } from "@/components/lib/actions/authAction";
 
-const DELETE = withErrorHandler(async () => {
+const DELETE = withErrorHandler(async (request: NextRequest) => {
+    await connection();
     const response = NextResponse.json({ message: 'Profile picture deleted successfully' }, { status: 200 });
-    const userData = await validateTokenServerSide(true);
+    const userData = await validateTokenServerSide(request);
     const { userId, profilePicture } = userData;
-    try{
+    try {
         await connectToDatabase();
         await User.updateOne({ _id: userId }, { $set: { profilePicture: null } }, { runValidators: true });
         updateUserCache(userData);
-    }catch(err){
+    } catch (err) {
         logger.error('Error updating user profile picture to database', err);
         throw new httpError('Error deleting profile picture.\nPlease try again', 500);
     }

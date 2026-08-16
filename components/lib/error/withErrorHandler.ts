@@ -7,9 +7,13 @@ type RouteHandler = (req: NextRequest, context?: any) => Promise<Response>;
 
 function withErrorHandler(handler: RouteHandler): RouteHandler {
     return async (req: NextRequest, context?: any) => {
-        try { 
+        try {
             return await handler(req, context);
         } catch (error) {
+            if (error && typeof error === 'object' && 'digest' in error) {
+                logger.error('Digest error', error);
+                return NextResponse.json({ message: 'Something went wrong\nPlease try again' }, { status: 500 });
+            }
             if (error instanceof httpError) {
                 const response = NextResponse.json({ message: error.message }, { status: error.statusCode });
                 if (error.cause === 'authError') {

@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest, connection } from "next/server";
 import connectToDatabase from "@/components/lib/database/mongoose";
 import { withErrorHandler } from "@/components/lib/error/withErrorHandler";
 import { httpError } from "@/components/lib/error/errorModel";
@@ -8,19 +8,20 @@ import { logger } from "@/components/lib/logger";
 import { updateUserCache } from "@/components/lib/services/userServices";
 
 const PATCH = withErrorHandler(async (request: NextRequest) => {
+    await connection();
     const { userId } = await verifyOTP(request);
     let userData;
-    try{
+    try {
         await connectToDatabase();
         const user = await User.findById(userId);
-        if(!user){
+        if (!user) {
             throw new httpError('User not found', 404);
         }
         user.verified = true;
         await user.save();
-        userData = user.toObject({getters: true});
+        userData = user.toObject({ getters: true });
         updateUserCache(userData);
-    }catch(err){
+    } catch (err) {
         logger.error('Error updating user verification status to database', err);
         throw new httpError('Error verifying account.\nPlease try again', 500);
     }

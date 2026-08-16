@@ -12,7 +12,7 @@ interface ChatPageProps {
 }
 
 const ChatPageRoot = async ({params, searchParams}: ChatPageProps) => {
-  const { userId } = await validateTokenServerSide(false);
+  const { userId } = await validateTokenServerSide();
   const { index } = await params;
   let receiverData, contactMessages: MessageInfo[] = [];
   if(index === 'new'){

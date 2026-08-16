@@ -64,6 +64,7 @@ const useChat = (contact: Contact) => {
             messageInfo.error = 'Unable to establish connection.\nPlease try again'
             handleUpdateMessages([messageInfo]);
             errorToast(messageInfo.error, 'Failed to send message');
+            chatSocket.emit('join-room', index, setChatRoom);
         } else {
             chatSocket.emit('send-message', chatRoom, index, messageInfo);
         }
