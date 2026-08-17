@@ -13,7 +13,7 @@ interface ContactCardProps {
 
 const SearchContactCard = ({ contact, onClose, ...props }: ContactCardProps) => {
     const router = useRouter();
-    const { index, email } = contact; 
+    const { index, email } = contact;
     const chatLink = index >= 0 ? `/chat/${index}` : `/chat/new?email=${email}`;
 
     const handleClick = () => {
@@ -22,10 +22,11 @@ const SearchContactCard = ({ contact, onClose, ...props }: ContactCardProps) => 
     }
 
     return (
-        <li onClick={handleClick} {...props}  
-            className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow hover:bg-gray-50, w-full sm:w-75 cursor-pointer")}>
-            <Image src={contact.profilePicture || DummyProfile} alt={contact.name} width={56} height={56} loading='eager' 
-            className="w-14 h-14 aspect-square object-cover object-top rounded-full" />
+        <li onClick={handleClick} {...props}
+            className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow hover:bg-gray-50, w-full sm:w-75 cursor-pointer",
+                "dark:bg-mist-950 dark:hover:bg-mist-900")}>
+            <Image src={contact.profilePicture || DummyProfile} alt={contact.name} width={56} height={56} loading='eager'
+                className="w-14 h-14 aspect-square object-cover object-top rounded-full" />
             <div className="flex flex-col w-full">
                 <Tooltip text={contact.name}>
                     <p className="text-lg font-semibold">{shrinkText(contact.name, 20)}</p>

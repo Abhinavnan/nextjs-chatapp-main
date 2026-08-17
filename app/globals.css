@@ -15,8 +15,40 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+
+  .navbar {
+    background-color: #171717;
+  }
+
+  .home {
+    background-color: #171717 !important;
+    color: #e0f8dd;
+  }
+
+  .navbar a {
+    background-color: #00a63e;
+    color: #f2f9f1;
+  }
+
+  .navbar a:hover {
+    background-color: #008236;
+    color: #ffffff;
+  }
+
+  form {
+    background-color: #171717;
+  }
+
+  form .error-text {
+    color: #fc0000;
+  }
+
+  .lucide-eye-off,
+  .lucide-eye {
+    color: #f2f9f1dc;
   }
 }
 
@@ -51,4 +83,8 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   pointer-events: none;
   position: absolute;
   right: 0;
+}
+
+button {
+  cursor: pointer;
 }

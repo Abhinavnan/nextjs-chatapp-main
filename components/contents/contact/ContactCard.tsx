@@ -16,10 +16,12 @@ interface ContactCardProps {
 
 const ContactCard = ({ contact }: ContactCardProps) => {
     return (
-        <li key={contact.index} 
-            className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow hover:bg-gray-50 w-full sm:w-75 h-full")}>
-            <Image src={contact.profilePicture || DummyProfile} alt={contact.name} width={64} height={64} loading='eager' 
-             className="w-16 h-16 aspect-square object-cover object-top rounded-full" />
+        <li key={contact.index}
+            className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow hover:bg-gray-50 w-full sm:w-75 h-full",
+                "dark:bg-mist-950 dark:hover:bg-mist-900",
+            )}>
+            <Image src={contact.profilePicture || DummyProfile} alt={contact.name} width={64} height={64} loading='eager'
+                className="w-16 h-16 aspect-square object-cover object-top rounded-full" />
             <div className="flex flex-col w-full">
                 <Tooltip text={contact.name}>
                     <p className="text-lg font-semibold">{shrinkText(contact.name, 20)}</p>

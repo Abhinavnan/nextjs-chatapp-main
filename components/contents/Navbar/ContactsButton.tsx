@@ -7,11 +7,8 @@ const ContactsButton = () => {
     const hideButton = pathname.includes('/contact') && !pathname.startsWith('/contact/');
 
     return (
-        <Link href="/contact">
-            <button 
-             className={hideButton ? "hidden" : "bg-white text-green-500 p-2 py-1 rounded-md font-semibold cursor-pointer"}>
-                Contacts
-            </button>
+        <Link href="/contact" className={hideButton ? "hidden" : "bg-white text-green-500 p-2 py-1 rounded-md font-semibold cursor-pointer"}>
+            Contacts
         </Link>
     )
 }

@@ -22,14 +22,14 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    if(!trimmedQuery)
+    if (!trimmedQuery)
       return;
     const timer = window.setTimeout(() => {
       activeRequest.current?.abort();
       activeRequest.current = triggerSearch({ query: trimmedQuery, limit: 10 });
     }, 500);
-    return () => { 
-      window.clearTimeout(timer) 
+    return () => {
+      window.clearTimeout(timer)
       activeRequest.current?.abort();
     };
   }, [trimmedQuery, triggerSearch]);
@@ -47,23 +47,25 @@ const SearchBar = () => {
   }
 
   const handleClick = () => {
-    if(!openContacts){
+    if (!openContacts) {
       activeRequest.current?.abort();
       activeRequest.current = triggerSearch({ query: trimmedQuery, limit: 10 });
       setOpenContacts(true);
     }
   }
-    
+
   return (
     <div className="w-full max-w-xl relative">
       <input
+        id="searchContacts"
         type="text"
         value={query}
         onClick={handleClick}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search Contacts..."
         className={cn('input input-bordered w-full bg-white opacity-80 h-9 p-2 rounded-sm border-2 border-green-600',
-          'ring-2 ring-transparent focus:outline-none focus:ring-white'
+          'ring-2 ring-transparent focus:outline-none focus:ring-white dark:bg-mist-800 dark:placeholder:text-mist-50',
+          'dark:focus:ring-mist-900 dark:border-green-500'
         )}
       />
       <button onClick={handleClose}
@@ -73,21 +75,21 @@ const SearchBar = () => {
       {openContacts && (
         <ul ref={containerRef}
           className={cn("absolute top-10 p-2 w-fit bg-teal-100/90 rounded-md shadow-md z-10 grid grid-flow-row grid-cols-1 gap-2",
-            "max-h-[85vh] overflow-y-auto w-[90vw] md:w-auto" 
+            "max-h-[85vh] overflow-y-auto w-[90vw] md:w-auto dark:bg-teal-950",
           )}>
           {contacts.map((contact) => (
             <SearchContactCard key={contact.index || contact.email} contact={contact} onClose={handleClose} />
           ))}
           {isSearching &&
             <li key={1} className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow",
-              "hover:bg-gray-50, w-full sm:w-75")}>
-                <p className="text-lg font-semibold">Searching...</p>
+              "hover:bg-gray-50, w-full sm:w-75 dark:bg-mist-950")}>
+              <p className="text-lg font-semibold">Searching...</p>
             </li>
           }
           {noResult &&
             <li key={1} className={cn("flex items-center space-x-4 p-4 bg-mist-50 rounded-lg shadow",
-              "hover:bg-gray-50, w-full sm:w-75")}>
-                <p className="text-lg font-semibold">No contacts found</p>
+              "hover:bg-gray-50, w-full sm:w-75 dark:bg-mist-950")}>
+              <p className="text-lg font-semibold">No contacts found</p>
             </li>
           }
         </ul>
