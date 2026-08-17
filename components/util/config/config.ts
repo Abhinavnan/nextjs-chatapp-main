@@ -7,9 +7,11 @@ const s3BucketName = process.env.NEXT_AWS_S3_BUCKET_NAME;
 const resendApiKey = process.env.RESEND_API_KEY;
 const jwtSecret = process.env.JWT_SECRET as string;
 const isProduction = process.env.NODE_ENV === 'production';
+const domain = process.env.DOMAIN;
+const domainObject = domain ? { domain } : {};
 const sameSite: SameSite = process.env.SAME_SITE as SameSite || 'strict';
 const resendInternalMail = process.env.INTERNAL_EMAIL_ADDRESS || 'example@example.com';
-const cookieOptions = { httpOnly: true, secure: isProduction, sameSite, maxAge: 86400 } as const;
+const cookieOptions = { httpOnly: true, secure: isProduction, sameSite, ...domainObject, maxAge: 86400 } as const;
 const webSocketUrl = process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'ws://localhost:3000';
 
 export {

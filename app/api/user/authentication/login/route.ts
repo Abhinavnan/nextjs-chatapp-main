@@ -15,25 +15,25 @@ const LoginSchema = zod.object({
 const POST = withErrorHandler(async (request: NextRequest) => {
     const { email, password } = await request.json();
     const parsedInputs = LoginSchema.safeParse({ email, password });
-    if(!parsedInputs.success){
+    if (!parsedInputs.success) {
         throw new httpError(parseZodError(parsedInputs), 400);
     }
     const user = await getUserDetailsByEmail(email);
-    if(!user){
+    if (!user) {
         throw new httpError('User with this email does not exist\nPlease try to register instead', 400);
     };
     const { verified } = user;
-    if(!verified){
-        const response = NextResponse.json({ message: 'Account not verified\nPlease check your email to verify your account', verified }, 
+    if (!verified) {
+        const response = NextResponse.json({ message: 'Account not verified\nPlease check your email to verify your account', verified },
             { status: 201 });
         await sendOTP(response, user);
         return response;
     }
     const isMatch = await bycrypt.compare(password, user.password);
-    if(!isMatch){
+    if (!isMatch) {
         throw new httpError('Invalid email or password\nPlease try again', 400);
     }
-    const response = NextResponse.json({ message: 'Login successful', verified}, { status: 201 });
+    const response = NextResponse.json({ message: 'Login successful', verified }, { status: 201 });
     await generateToken(request, response, user);
     return response;
 });
