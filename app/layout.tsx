@@ -16,13 +16,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Chat APP",
-  description: "A simple chat application built with Next.js, React, and Redux.",
+  description: `A real-time chat application built with Next.js, React, Redux, and WebSockets. Features MongoDB database integration and AWS S3 
+    file storage for scalable messaging.`,
   authors: [{ name: "ABHINAV U V", url: "https://github.com/Abhinavnan" }],
   creator: "ABHINAV U V",
-  applicationName: "Chat APP",
+  applicationName: "Chat APP"
 };
 
-export default function RootLayout({ children}: Readonly<{ children: React.ReactNode; }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}antialiased min-h-screen flex flex-col`}>
