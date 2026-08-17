@@ -6,6 +6,7 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
+        - env | grep -e NEXT_PUBLIC_WEBSOCKET_URL -e INTERNAL_EMAIL_ADDRESS -e RESEND_API_KEY -e NEXT_AWS_S3_BUCKET_NAME -e NEXT_AWS_REGION -e MONGODB_CONNECTION_URL -e SAME_SITE -e JWT_SECRET -e NODE_ENV -e DOMAIN >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
