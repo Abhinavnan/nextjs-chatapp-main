@@ -1,7 +1,7 @@
 import 'server-only';
 import jwt from 'jsonwebtoken';
 import { cookies, headers } from 'next/headers';
-import { NextRequest } from 'next/server';
+import { NextRequest, connection } from 'next/server';
 import { jwtSecret } from '@/components/util/config/config';
 import { logger } from '@/components/lib/logger';
 import { getUserSessionDetails, getUserDetailsById } from '@/components/lib/services/userServices';
@@ -21,6 +21,7 @@ const validateTokenServerSide = async (request?: NextRequest | null) => {
         logger.warn('Missing authToken or sessionId in cookies', deviceInfo);
         hybridError('User session expired.\nPlease login again', 401, !!request);
     }
+    await connection();
     let userId, sessionDetails, isSessionValid = true;
     if (authToken) {
         try {

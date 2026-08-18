@@ -1,3 +1,9 @@
 {
-    "markdown.validate.enabled": true
+    "markdown.validate.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "properties": false,
+        "dotenv": false
+    }
 }

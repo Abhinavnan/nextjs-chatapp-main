@@ -13,8 +13,11 @@ const sameSite: SameSite = process.env.SAME_SITE as SameSite || 'strict';
 const resendInternalMail = process.env.INTERNAL_EMAIL_ADDRESS || 'example@example.com';
 const cookieOptions = { httpOnly: true, secure: isProduction, sameSite, ...domainObject, maxAge: 86400 } as const;
 const webSocketUrl = process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'ws://localhost:3000';
+const awsAccessKeyId = process.env.NEXT_AWS_ACCESS_KEY_ID as string;
+const awsSecretAccessKey = process.env.NEXT_AWS_SECRET_ACCESS_KEY as string;
+const isAWSCredetionsAvailable = awsAccessKeyId && awsSecretAccessKey;
 
 export {
     baseUrl, mongoDBConnectionURL, awsRegion, s3BucketName, resendApiKey, jwtSecret, isProduction, resendInternalMail, cookieOptions,
-    webSocketUrl
+    webSocketUrl, isAWSCredetionsAvailable, awsAccessKeyId, awsSecretAccessKey
 };

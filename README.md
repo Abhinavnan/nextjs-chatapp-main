@@ -24,10 +24,12 @@ Key Architectural Features:
 
 
 
-|Host|AWS amplify|
+|Key|Value|
 |-|-|
+|Host|AWS amplify, Vercel|
 |Storage|AWS S3|
-|Hosted URL|https://www.main.nextjschatapp.mustilago.cc.cd|
+|Amplify Hosted URL|https://www.main.nextjschatapp.mustilago.cc.cd|
+|Vercel Hosted URL|https://www.front.nextjschatapp.mustilago.cc.cd|
 |Database|Mongo DB|
 |Free Subdomain Service|https://my.dnshe.com|
 |WebSocket Host|Render|

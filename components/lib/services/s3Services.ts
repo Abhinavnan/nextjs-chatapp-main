@@ -1,11 +1,16 @@
 import { S3Client } from "@aws-sdk/client-s3";
 import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { randomUUID } from 'crypto';
-import { awsRegion, s3BucketName } from "@/components/util/config/config";
+import { awsRegion, s3BucketName, isAWSCredetionsAvailable, awsAccessKeyId, awsSecretAccessKey } from "@/components/util/config/config";
 import { logger } from "@/components/lib/logger";
 import { httpError } from "@/components/lib/error/errorModel";
 
-const s3Client = new S3Client({ region: awsRegion });
+let s3Client: S3Client;
+if (isAWSCredetionsAvailable) {
+    s3Client = new S3Client({ region: awsRegion, credentials: { accessKeyId: awsAccessKeyId, secretAccessKey: awsSecretAccessKey } });
+} else {
+    s3Client = new S3Client({ region: awsRegion });
+}
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg', 'image/svg+xml', 'image/avif'];
 const MAX_SIZE = 1048576; // 1MB
