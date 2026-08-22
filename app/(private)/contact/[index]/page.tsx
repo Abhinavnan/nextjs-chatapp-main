@@ -6,6 +6,8 @@ interface ContactDetailsPageProps {
   params: Promise<{ index: string; }>;
 }
 
+export const instant = false;
+
 const ContactDetailsPage = ({ params }: ContactDetailsPageProps) => {
   return (
     <Suspense fallback={<ProfilePageSkeleton type='contact' />} >

@@ -15,13 +15,14 @@ import { getUserSessionDetails, refreshUserSession, deleteUserSession } from '@/
 import connectToDatabase from "@/components/lib/database/mongoose";
 
 const createAuthCookies = (response: NextResponse, userSession: Record<string, any>) => {
-    const authId = crypto.randomUUID();
+    const refreshTimeout = dayjs().add(1780, 'seconds').toISOString();
+    const sessionTimeout = dayjs().add(1, 'day').toISOString();
     const token = jwt.sign({ userId: userSession.userId }, jwtSecret, { expiresIn: '30m' });
     response.cookies.set('sessionId', userSession.id, cookieOptions);
     response.cookies.set('refreshId', userSession.refreshId, cookieOptions);
     response.cookies.set('authToken', token, { ...cookieOptions, maxAge: 1800 });
-    response.cookies.set('authId', authId, { ...cookieOptions, httpOnly: false, maxAge: 1700 });
-    response.cookies.set('login', 'true', { ...cookieOptions, httpOnly: false });
+    response.cookies.set('refreshTimeout', refreshTimeout, { ...cookieOptions, httpOnly: false });
+    response.cookies.set('sessionTimeout', sessionTimeout, { ...cookieOptions, httpOnly: false });
 }
 
 const generateToken = async (request: NextRequest, response: NextResponse, user: UserDetails) => {
