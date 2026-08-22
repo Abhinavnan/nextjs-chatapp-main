@@ -37,7 +37,7 @@ const ResetPassword = ({ type }: { type: 'reset' | 'verifyEmail' }) => {
     disableEmail && isLogin && { text: 'Back to Edit profile page', link: '/profile/edit', },
     disableEmail && { text: 'Back to Regitration page', link: '/register', },
     { text: 'Back to login page', link: '/login', }
-  ].filter(Boolean)[0];
+  ].filter(Boolean)[0] as { text: string, link: string };
 
   if (paramStatus !== prevParamStatus) {
     setPrevParamStatus(paramStatus);
